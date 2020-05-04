@@ -1,5 +1,7 @@
 FROM php:7.4
 
+ARG SSH_PRIVATE_KEY
+
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
   && apt-get update && apt-get install -y wget git zip unzip nodejs openssh-client \
   && eval $(ssh-agent -s) \
