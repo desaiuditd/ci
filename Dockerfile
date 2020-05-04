@@ -1,13 +1,7 @@
 FROM php:7.4
 
-ARG SSH_PRIVATE_KEY
-
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
   && apt-get update && apt-get install -y wget git zip unzip nodejs openssh-client \
-  && eval $(ssh-agent -s) \
-  && echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - \
-  && mkdir -p ~/.ssh \
-  && chmod 700 ~/.ssh \
   && git config --global user.name "desaiuditd/ci" \
   && wget https://composer.github.io/installer.sig -O - -q | tr -d '\n' > installer.sig \
   && php -r "copy( 'https://getcomposer.org/installer', 'composer-setup.php' );" \
